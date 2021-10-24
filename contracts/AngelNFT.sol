@@ -47,19 +47,19 @@ contract AngelNFT is ERC721Enumerable, Ownable {
 
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
       require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
-			string memory currentBaseURI = _baseURI();
-			return bytes(currentBaseURI).length > 0
-				    ?  string(abi.encodePacked(currentBaseURI,  Strings.toString(tokenId), '.json'))
-					: '';
+	string memory currentBaseURI = _baseURI();
+		return bytes(currentBaseURI).length > 0
+		?  string(abi.encodePacked(currentBaseURI,  Strings.toString(tokenId), '.json'))
+		: '';
     }
 
-		function pause(bool _state) public onlyOwner() {
-			paused = _state;
-		}
+     function pause(bool _state) public onlyOwner() {
+	paused = _state;
+    }
 
-		function withdrawAll() public payable onlyOwner() {
-			uint256 amount = address(this).balance;
-			payable(msg.sender).transfer(amount);
-		}
+     function withdrawAll() public payable onlyOwner() {
+	uint256 amount = address(this).balance;
+	payable(msg.sender).transfer(amount);
+    }
 
 }
